@@ -23,15 +23,15 @@ class _ProductsOverviewPageState extends State<ProductsOverviewPage> {
         title: const Text('Minha Loja!'),
         actions: [
           PopupMenuButton(
-            icon: Icon(Icons.more_vert),
+            icon: const Icon(Icons.more_vert),
             itemBuilder: (_) => [
-              PopupMenuItem(
-                child: Text('Somente Favoritos'),
+              const PopupMenuItem(
                 value: FilterOptions.favorite,
+                child: Text('Somente Favoritos'),
               ),
-              PopupMenuItem(
-                child: Text('Todos'),
+              const PopupMenuItem(
                 value: FilterOptions.all,
+                child: Text('Todos'),
               ),
             ],
             onSelected: (FilterOptions selectedValue) {
