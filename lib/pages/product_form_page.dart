@@ -1,16 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:shop/components/app_drawer.dart';
 
-class ProductsForm extends StatelessWidget {
-  const ProductsForm({super.key});
+class ProductFormPage extends StatefulWidget {
+  const ProductFormPage({super.key});
 
+  @override
+  State<ProductFormPage> createState() => _ProductFormPageState();
+}
+
+class _ProductFormPageState extends State<ProductFormPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Formulário de Produto'),
+        title: const Text('Formulário de Produto'),
       ),
-      drawer: AppDrawer(),
+      drawer: const AppDrawer(),
     );
   }
 }
