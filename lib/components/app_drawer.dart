@@ -39,7 +39,7 @@ class AppDrawer extends StatelessWidget {
           ),
           const Divider(),
           ListTile(
-            leading: const Icon(Icons.list),
+            leading: const Icon(Icons.add),
             title: const Text('Adicionar Produto'),
             onTap: () => Navigator.of(context).pushReplacementNamed(
               AppRoutes.productForm,
