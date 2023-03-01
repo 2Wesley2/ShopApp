@@ -1,4 +1,4 @@
-// ignore_for_file: avoid_print, no_leading_underscores_for_local_identifiers
+// ignore_for_file: avoid_print
 
 import 'dart:math';
 
@@ -40,6 +40,14 @@ class _ProductFormPageState extends State<ProductFormPage> {
 
   void updateImage() {
     setState(() {});
+  }
+
+  bool isValidImageUrl(String url) {
+    bool isValidUrl = Uri.tryParse(url)?.hasAbsolutePath ?? false;
+    bool endsWithFile = url.toLowerCase().endsWith('.png') ||
+        url.toLowerCase().endsWith('.jpg') ||
+        url.toLowerCase().endsWith('.jpeg');
+    return isValidUrl && endsWithFile;
   }
 
   void _submitForm() {
@@ -91,8 +99,8 @@ class _ProductFormPageState extends State<ProductFormPage> {
                   FocusScope.of(context).requestFocus(_priceFocus);
                 },
                 onSaved: (name) => _formData['name'] = name ?? '',
-                validator: (_name) {
-                  final name = _name ?? '';
+                validator: (name_) {
+                  final name = name_ ?? '';
 
                   if (name.trim().isEmpty) {
                     return 'Nome é obrigatório.';
@@ -111,12 +119,23 @@ class _ProductFormPageState extends State<ProductFormPage> {
                 focusNode: _priceFocus,
                 keyboardType: const TextInputType.numberWithOptions(
                   decimal: true,
+                  signed: true,
                 ),
                 onFieldSubmitted: (_) {
                   FocusScope.of(context).requestFocus(_descriptionFocus);
                 },
                 onSaved: (price) =>
                     _formData['price'] = double.parse(price ?? '0'),
+                validator: (price_) {
+                  final priceString = price_ ?? '';
+                  final price = double.tryParse(priceString) ?? -1;
+
+                  if (price <= 0) {
+                    return 'Informe um preço válido.';
+                  }
+
+                  return null;
+                },
               ),
               TextFormField(
                 decoration: const InputDecoration(labelText: 'Descrição'),
@@ -125,6 +144,19 @@ class _ProductFormPageState extends State<ProductFormPage> {
                 maxLines: 3,
                 onSaved: (description) =>
                     _formData['description'] = description ?? '',
+                validator: (description_) {
+                  final description = description_ ?? '';
+
+                  if (description.trim().isEmpty) {
+                    return 'Descrição é obrigatória.';
+                  }
+
+                  if (description.trim().length < 6) {
+                    return 'Descrição precisa no mínimo de 10 letras.';
+                  }
+
+                  return null;
+                },
               ),
               Row(
                 crossAxisAlignment: CrossAxisAlignment.end,
@@ -140,6 +172,15 @@ class _ProductFormPageState extends State<ProductFormPage> {
                       onFieldSubmitted: (_) => _submitForm(),
                       onSaved: (imageUrl) =>
                           _formData['imageUrl'] = imageUrl ?? '',
+                      validator: (imageUrl_) {
+                        final imageUrl = imageUrl_ ?? '';
+
+                        if (!isValidImageUrl(imageUrl)) {
+                          return 'Informe uma Url válida!';
+                        }
+
+                        return null;
+                      },
                     ),
                   ),
                   Container(
@@ -157,10 +198,14 @@ class _ProductFormPageState extends State<ProductFormPage> {
                     ),
                     alignment: Alignment.center,
                     child: _imageUrlController.text.isEmpty
-                        ? const Text('Informe a Url')
+                        ? const Text(
+                            'Informe a Url',
+                          )
                         : FittedBox(
                             fit: BoxFit.cover,
-                            child: Image.network(_imageUrlController.text),
+                            child: Image.network(
+                              _imageUrlController.text,
+                            ),
                           ),
                   ),
                 ],
