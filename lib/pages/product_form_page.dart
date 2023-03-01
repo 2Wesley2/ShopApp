@@ -1,8 +1,10 @@
 import 'package:provider/provider.dart';
 
 import 'package:flutter/material.dart';
+import 'package:shop/components/app_drawer.dart';
 
 import 'package:shop/models/product_list.dart';
+import 'package:shop/utils/app_routes.dart';
 
 class ProductFormPage extends StatefulWidget {
   const ProductFormPage({Key? key}) : super(key: key);
@@ -62,7 +64,7 @@ class _ProductFormPageState extends State<ProductFormPage> {
       context,
       listen: false,
     ).addProductFromData(_formData);
-    Navigator.of(context).pop();
+    Navigator.of(context).pushNamed(AppRoutes.productForm);
   }
 
   @override
@@ -205,6 +207,7 @@ class _ProductFormPageState extends State<ProductFormPage> {
           ),
         ),
       ),
+      drawer: const AppDrawer(),
     );
   }
 }
