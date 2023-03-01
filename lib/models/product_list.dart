@@ -15,6 +15,11 @@ class ProductList with ChangeNotifier {
     return _items.length;
   }
 
+  void addProduct(Product product) {
+    _items.add(product);
+    notifyListeners();
+  }
+
   void addProductFromData(Map<String, Object> data) {
     final newProduct = Product(
       id: Random().nextDouble().toString(),
@@ -25,10 +30,5 @@ class ProductList with ChangeNotifier {
     );
 
     addProduct(newProduct);
-  }
-
-  void addProduct(Product product) {
-    _items.add(product);
-    notifyListeners();
   }
 }
