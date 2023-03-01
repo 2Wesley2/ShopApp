@@ -1,9 +1,9 @@
-// ignore_for_file: avoid_print
-
 import 'dart:math';
+import 'package:provider/provider.dart';
 
 import 'package:flutter/material.dart';
 import 'package:shop/models/product.dart';
+import 'package:shop/models/product_list.dart';
 
 class ProductFormPage extends StatefulWidget {
   const ProductFormPage({Key? key}) : super(key: key);
@@ -66,12 +66,11 @@ class _ProductFormPageState extends State<ProductFormPage> {
       price: _formData['price'] as double,
       imageUrl: _formData['imageUrl'] as String,
     );
-
-    print(newProduct.id);
-    print(newProduct.name);
-    print(newProduct.description);
-    print(newProduct.price);
-    print(newProduct.imageUrl);
+    Provider.of<ProductList>(
+      context,
+      listen: false,
+    ).addProduct(newProduct);
+    Navigator.of(context).pop();
   }
 
   @override
