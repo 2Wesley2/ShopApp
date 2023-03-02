@@ -63,7 +63,7 @@ class _ProductFormPageState extends State<ProductFormPage> {
     Provider.of<ProductList>(
       context,
       listen: false,
-    ).addProductFromData(_formData);
+    ).saveProduct(_formData);
     Navigator.of(context).pushNamed(AppRoutes.productForm);
   }
 
