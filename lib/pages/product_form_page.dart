@@ -123,7 +123,6 @@ class _ProductFormPageState extends State<ProductFormPage> {
                   if (name.trim().length <= 3) {
                     return 'Nome precisa no mínimo de 3 letras.';
                   }
-
                   return null;
                 },
               ),
@@ -148,7 +147,6 @@ class _ProductFormPageState extends State<ProductFormPage> {
                   if (price <= 0) {
                     return 'Informe um preço válido.';
                   }
-
                   return null;
                 },
               ),
@@ -170,7 +168,6 @@ class _ProductFormPageState extends State<ProductFormPage> {
                   if (description.trim().length < 6) {
                     return 'Descrição precisa no mínimo de 10 letras.';
                   }
-
                   return null;
                 },
               ),
@@ -194,7 +191,6 @@ class _ProductFormPageState extends State<ProductFormPage> {
                         if (!isValidImageUrl(imageUrl)) {
                           return 'Informe uma Url válida!';
                         }
-
                         return null;
                       },
                     ),
@@ -214,14 +210,10 @@ class _ProductFormPageState extends State<ProductFormPage> {
                     ),
                     alignment: Alignment.center,
                     child: _imageUrlController.text.isEmpty
-                        ? const Text(
-                            'Informe a Url',
-                          )
+                        ? const Text('Informe a Url')
                         : FittedBox(
                             fit: BoxFit.cover,
-                            child: Image.network(
-                              _imageUrlController.text,
-                            ),
+                            child: Image.network(_imageUrlController.text),
                           ),
                   ),
                 ],
