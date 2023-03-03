@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:shop/components/app_drawer.dart';
 import 'package:shop/models/product.dart';
 import 'package:shop/models/product_list.dart';
+import 'package:shop/utils/app_routes.dart';
 
 class ProductFormPage extends StatefulWidget {
   const ProductFormPage({Key? key}) : super(key: key);
@@ -81,7 +82,9 @@ class _ProductFormPageState extends State<ProductFormPage> {
       context,
       listen: false,
     ).saveProduct(_formData);
-    Navigator.of(context).pop();
+    Navigator.of(context).pushNamed(
+      AppRoutes.productForm,
+    );
   }
 
   @override
