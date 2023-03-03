@@ -24,7 +24,7 @@ class ProductList with ChangeNotifier {
     int index = _items.indexWhere((p) => p.id == product.id);
 
     if (index >= 0) {
-      _items[index] = product;
+      _items[index ] = product;
       notifyListeners();
     }
   }
